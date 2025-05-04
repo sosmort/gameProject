@@ -14,7 +14,7 @@ export interface Game {
   metacritic: number;
 }
 export const boxStyle = {
-  width: "300px",
+  width: "100%",
   borderRadius: 10,
   overflow: "hidden",
 };
