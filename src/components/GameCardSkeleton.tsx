@@ -1,9 +1,10 @@
 import { Card, CardBody, Skeleton, SkeletonText } from "@chakra-ui/react";
+import { boxStyle } from "./hooks/useGames";
 
 const GameCardSkeleton = () => {
   return (
     <>
-      <Card width="300px" borderRadius={10} overflow="hidden">
+      <Card style={boxStyle}>
         <Skeleton height="200px" />
         <CardBody>
           <SkeletonText />

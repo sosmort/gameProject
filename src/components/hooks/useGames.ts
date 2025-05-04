@@ -15,6 +15,11 @@ export interface Game {
   parent_platforms: { platform: Platform }[];
   metacritic: number;
 }
+export const boxStyle = {
+  width: "300px",
+  borderRadius: 10,
+  overflow: "hidden",
+};
 interface FetchGamesResonse {
   count: number;
   results: Game[];
