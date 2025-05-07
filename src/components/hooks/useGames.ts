@@ -20,9 +20,14 @@ export const boxStyle = {
   overflow: "hidden",
 };
 
-const useGames = (selectedGenres: Genre | null) =>
-  useData<Game>("/games", { params: { genres: selectedGenres?.id } }, [
-    selectedGenres?.id,
-  ]);
+const useGames = (
+  selectedGenres: Genre | null,
+  selectPlatform: Platform | null
+) =>
+  useData<Game>(
+    "/games",
+    { params: { genres: selectedGenres?.id, platforms: selectPlatform?.id } },
+    [selectedGenres?.id, selectPlatform?.id]
+  );
 
 export default useGames;
