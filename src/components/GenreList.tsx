@@ -3,7 +3,6 @@ import {
   Image,
   List,
   ListItem,
-  Text,
   SkeletonText,
   SkeletonCircle,
   Button,
