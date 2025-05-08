@@ -1,3 +1,4 @@
+import { GameQuery } from "../../App";
 import useData from "./useData";
 import { Genre } from "./useGenres";
 
@@ -20,14 +21,16 @@ export const boxStyle = {
   overflow: "hidden",
 };
 
-const useGames = (
-  selectedGenres: Genre | null,
-  selectPlatform: Platform | null
-) =>
+const useGames = (gameQuery: GameQuery) =>
   useData<Game>(
     "/games",
-    { params: { genres: selectedGenres?.id, platforms: selectPlatform?.id } },
-    [selectedGenres?.id, selectPlatform?.id]
+    {
+      params: {
+        genres: gameQuery.genre?.id,
+        platforms: gameQuery.platform?.id,
+      },
+    },
+    [gameQuery]
   );
 
 export default useGames;
