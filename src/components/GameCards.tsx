@@ -1,4 +1,4 @@
-import { Card, CardBody, Image, Heading, HStack } from "@chakra-ui/react";
+import { Card, CardBody, Image, Heading, HStack, Flex } from "@chakra-ui/react";
 import { Game, boxStyle } from "./hooks/useGames";
 import PlatformIcons from "./PlatformIcons";
 import CriticScore from "./CriticScore";
@@ -17,7 +17,7 @@ const GameCards = ({ game }: Props) => {
             : nullImage
         }
       />
-      <CardBody>
+      <CardBody as={Flex} flexDirection="column" justifyContent="space-between">
         <Heading fontSize="2xl">{game.name} </Heading>
         <HStack justifyContent="space-between">
           <PlatformIcons
