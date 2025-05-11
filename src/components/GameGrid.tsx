@@ -22,9 +22,9 @@ const GameGrid = ({ gameQuery }: Props) => {
         spacing={5}
         padding={5}
       >
-        {isLoading &&
-          skeletons.map((_, index) => <GameCardSkeleton key={index} />)}
-        {data.length > 0 ? (
+        {isLoading ? (
+          skeletons.map((_, index) => <GameCardSkeleton key={index} />)
+        ) : data.length > 0 ? (
           data.map((game) => <GameCards key={game.id} game={game} />)
         ) : (
           <Box
