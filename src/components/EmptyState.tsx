@@ -4,7 +4,7 @@ const EmptyState = () => {
   return (
     <Box textAlign="center" py={10} px={6}>
       <Image
-        src="/empty-state-illustration.svg"
+        src="https://cdn-icons-png.flaticon.com/512/4076/4076549.png"
         alt="No Data"
         maxW="200px"
         mx="auto"
