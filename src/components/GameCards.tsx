@@ -4,6 +4,7 @@ import PlatformIcons from "./PlatformIcons";
 import CriticScore from "./CriticScore";
 import getCroppedUrlImage from "../services/image-url";
 import nullImage from "../assets/no-image-placeholder.webp";
+import Emojis from "./Emojis";
 interface Props {
   game: Game;
 }
@@ -18,7 +19,9 @@ const GameCards = ({ game }: Props) => {
         }
       />
       <CardBody as={Flex} flexDirection="column" justifyContent="space-between">
-        <Heading fontSize="2xl">{game.name} </Heading>
+        <Heading fontSize="2xl">
+          {game.name} <Emojis rating={game.rating_top} />{" "}
+        </Heading>
         <HStack justifyContent="space-between">
           <PlatformIcons
             platforms={game.parent_platforms.map((p) => p.platform)}
