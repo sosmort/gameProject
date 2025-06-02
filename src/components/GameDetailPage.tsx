@@ -4,14 +4,13 @@ import {
   Image,
   Flex,
   Stack,
-  useBreakpointValue,
   Skeleton,
   Text,
   SkeletonText,
 } from "@chakra-ui/react";
 import useGameDetails from "./hooks/useGameDetails";
 import { Link, useParams } from "react-router-dom";
-import { Button, Icon } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 
 const GameDetailPage = () => {
@@ -24,11 +23,11 @@ const GameDetailPage = () => {
 
   if (!id) return <Text>Game ID not found</Text>;
 
-  const { dataDetails: game, isLoading, errors } = useGameDetails(id!);
+  const { dataDetails: GameDetails, isLoading, errors } = useGameDetails(id!);
 
   // if (isLoading) return <GameCardSkeleton />;
   if (errors) return <Text>Failed to load game data</Text>;
-  if (!game) return <Text>No game found</Text>;
+  if (!GameDetails) return <Text>No game found</Text>;
   return (
     <>
       <Flex
@@ -66,8 +65,8 @@ const GameDetailPage = () => {
               </Button>
             </Link>
             <Image
-              src={game.background_image}
-              alt={game.name}
+              src={GameDetails.background_image}
+              alt={GameDetails.name}
               objectFit="cover"
               borderRadius="lg"
               w="100%"
@@ -78,10 +77,10 @@ const GameDetailPage = () => {
 
         {/* Text */}
         <Stack flex="1" spacing={4} w="100%">
-          <Heading size="2xl">{game.name}</Heading>
+          <Heading size="2xl">{GameDetails.name}</Heading>
           <Box
             fontSize="md"
-            dangerouslySetInnerHTML={{ __html: game.description }}
+            dangerouslySetInnerHTML={{ __html: GameDetails.description }}
           ></Box>
         </Stack>
       </Flex>
