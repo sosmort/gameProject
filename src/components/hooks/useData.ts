@@ -13,6 +13,7 @@ const useData = <T>(
   deps?: any[]
 ) => {
   const [data, setData] = useState<T[]>([]);
+  const [dataDetails, setDataDetails] = useState<T[]>([]);
   const [errors, setErrors] = useState("");
   const [isLoading, setLoading] = useState(false);
   useEffect(
@@ -26,6 +27,7 @@ const useData = <T>(
         })
         .then((res) => {
           setData(res.data.results);
+          setDataDetails(res.data);
           setLoading(false);
         })
 
@@ -38,7 +40,7 @@ const useData = <T>(
     },
     deps ? [...deps] : []
   );
-  return { data, errors, isLoading };
+  return { data, errors, isLoading, dataDetails };
 };
 
 export default useData;

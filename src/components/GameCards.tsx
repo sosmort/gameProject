@@ -5,31 +5,45 @@ import CriticScore from "./CriticScore";
 import getCroppedUrlImage from "../services/image-url";
 import nullImage from "../assets/no-image-placeholder.webp";
 import Emojis from "./Emojis";
+import { Link } from "react-router-dom";
 interface Props {
   game: Game;
 }
+export interface GameDetails {
+  id: number;
+  name: string;
+  description: string;
+  background_image: string;
+}
+
 const GameCards = ({ game }: Props) => {
   return (
-    <Card style={boxStyle}>
-      <Image
-        src={
-          getCroppedUrlImage(game.background_image || "")
-            ? getCroppedUrlImage(game.background_image || "")
-            : nullImage
-        }
-      />
-      <CardBody as={Flex} flexDirection="column" justifyContent="space-between">
-        <Heading fontSize="2xl">
-          {game.name} <Emojis rating={game.rating_top} />{" "}
-        </Heading>
-        <HStack justifyContent="space-between">
-          <PlatformIcons
-            platforms={game.parent_platforms.map((p) => p.platform)}
-          />
-          <CriticScore score={game.metacritic} />
-        </HStack>
-      </CardBody>
-    </Card>
+    <Link to={`/${game.id}`}>
+      <Card style={boxStyle}>
+        <Image
+          src={
+            getCroppedUrlImage(game.background_image || "")
+              ? getCroppedUrlImage(game.background_image || "")
+              : nullImage
+          }
+        />
+        <CardBody
+          as={Flex}
+          flexDirection="column"
+          justifyContent="space-between"
+        >
+          <Heading fontSize="2xl">
+            {game.name} <Emojis rating={game.rating_top} />{" "}
+          </Heading>
+          <HStack justifyContent="space-between">
+            <PlatformIcons
+              platforms={game.parent_platforms.map((p) => p.platform)}
+            />
+            <CriticScore score={game.metacritic} />
+          </HStack>
+        </CardBody>
+      </Card>
+    </Link>
   );
 };
 

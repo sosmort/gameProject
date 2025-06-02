@@ -5,15 +5,18 @@ import GenreList from "./components/GenreList";
 import { useState } from "react";
 import { Genre } from "./components/hooks/useGenres";
 import PlatformSelector from "./components/PlatformSelector";
-import { Platform } from "./components/hooks/useGames";
+import { Game, Platform } from "./components/hooks/useGames";
 import SortSelector from "./components/SortSeletor";
 import GameHeading from "./components/GameHeading";
+import GameDetailPage from "./components/GameDetailPage";
+import { Routes, Route } from "react-router-dom";
 
 export interface GameQuery {
   genre: Genre | null;
   platform: Platform | null;
   sortOrder: string | null;
   searchText: string;
+  details: Game;
 }
 
 const App = () => {
@@ -22,56 +25,64 @@ const App = () => {
   const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
   return (
     <>
-      <Grid
-        templateAreas={{
-          base: `"nav" "main"  `,
-          lg: `"nav nav""aside main"`,
-        }}
-        templateColumns={{
-          base: "1fr",
-          lg: "200px 1fr",
-        }}
-      >
-        <GridItem area="nav">
-          <NavBar
-            onSearch={(searchText) =>
-              setGameQuery({ ...gameQuery, searchText })
-            }
-          />
-        </GridItem>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Grid
+              templateAreas={{
+                base: `"nav" "main"  `,
+                lg: `"nav nav""aside main"`,
+              }}
+              templateColumns={{
+                base: "1fr",
+                lg: "200px 1fr",
+              }}
+            >
+              <GridItem area="nav">
+                <NavBar
+                  onSearch={(searchText) =>
+                    setGameQuery({ ...gameQuery, searchText })
+                  }
+                />
+              </GridItem>
 
-        <GridItem
-          area="aside"
-          display={{ base: "none", lg: "block" }}
-          paddingX={5}
-        >
-          <GenreList
-            selectedGenre={gameQuery.genre}
-            OnSetSelectedGenres={(genre) =>
-              setGameQuery({ ...gameQuery, genre })
-            }
-          />
-        </GridItem>
-        <GridItem area="main">
-          <GameHeading gameQuery={gameQuery} />
-          <Flex gap={3} paddingX={5}>
-            <PlatformSelector
-              selectedPlatform={gameQuery.platform}
-              OnselectedPlatrform={(platform) =>
-                setGameQuery({ ...gameQuery, platform })
-              }
-            />
-            <SortSelector
-              sortOrder={gameQuery.sortOrder ?? ""}
-              OnselectedSortOrder={(sortOrder) =>
-                setGameQuery({ ...gameQuery, sortOrder })
-              }
-            />
-          </Flex>
+              <GridItem
+                area="aside"
+                display={{ base: "none", lg: "block" }}
+                paddingX={5}
+              >
+                <GenreList
+                  selectedGenre={gameQuery.genre}
+                  OnSetSelectedGenres={(genre) =>
+                    setGameQuery({ ...gameQuery, genre })
+                  }
+                />
+              </GridItem>
+              <GridItem area="main">
+                <GameHeading gameQuery={gameQuery} />
+                <Flex gap={3} paddingX={5}>
+                  <PlatformSelector
+                    selectedPlatform={gameQuery.platform}
+                    OnselectedPlatrform={(platform) =>
+                      setGameQuery({ ...gameQuery, platform })
+                    }
+                  />
+                  <SortSelector
+                    sortOrder={gameQuery.sortOrder ?? ""}
+                    OnselectedSortOrder={(sortOrder) =>
+                      setGameQuery({ ...gameQuery, sortOrder })
+                    }
+                  />
+                </Flex>
 
-          <GameGrid gameQuery={gameQuery} />
-        </GridItem>
-      </Grid>
+                <GameGrid gameQuery={gameQuery} />
+              </GridItem>
+            </Grid>
+          }
+        />
+        <Route path="/:id" element={<GameDetailPage />} />
+      </Routes>
     </>
   );
 };
