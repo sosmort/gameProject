@@ -14,8 +14,9 @@ const SearchInput = ({ onSearch }: Props) => {
         event.preventDefault();
         if (ref.current) onSearch(ref.current.value);
       }}
+      style={{ width: "100%" }}
     >
-      <InputGroup>
+      <InputGroup width="100%">
         <InputLeftElement children={<BsSearch />} cursor="pointer" />
         <Input
           borderRadius={20}
