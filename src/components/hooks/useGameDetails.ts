@@ -1,5 +1,5 @@
 // hooks/useGame.ts
-import useData from "./useData";
+import useData from "./useItemData";
 // import { Game } from "./useGames";
 import { GameDetails } from "../GameCards";
 const useGameDetails = (id: number | string) =>

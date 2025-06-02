@@ -27,7 +27,22 @@ const GameDetailPage = () => {
 
   // if (isLoading) return <GameCardSkeleton />;
   if (errors) return <Text>Failed to load game data</Text>;
-  if (!GameDetails) return <Text>No game found</Text>;
+  if (!GameDetails)
+    return (
+      <Flex
+        direction="column"
+        gap={8}
+        p={4}
+        maxW="1200px"
+        mx="auto"
+        align="flex-start"
+      >
+        <Box w="100%">
+          <Skeleton height="600px" borderRadius="lg" />
+          <SkeletonText mt="4" noOfLines={3} spacing="4" skeletonHeight="4" />
+        </Box>
+      </Flex>
+    );
   return (
     <>
       <Flex
@@ -38,7 +53,7 @@ const GameDetailPage = () => {
         mx="auto"
         align="flex-start"
       >
-        {isLoading ? (
+        {isLoading && !GameDetails ? (
           <Box w="100%">
             <Skeleton height="600px" borderRadius="lg" />
             <SkeletonText mt="4" noOfLines={3} spacing="4" skeletonHeight="4" />
